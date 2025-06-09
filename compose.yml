@@ -1,5 +1,6 @@
 services:
   tts-server:
+    image: mercenary9312/tts-server
     build: .
     container_name: tts-server
     ports:
