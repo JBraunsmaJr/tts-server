@@ -1,0 +1,9 @@
+services:
+  tts-server:
+    build: .
+    container_name: tts-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./output:/app/output
+    restart: unless-stopped
