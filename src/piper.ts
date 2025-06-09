@@ -36,11 +36,11 @@ export interface PiperOptions {
     noiseW?: number
 
 
-    model: string;
+    model: "en_GB-northern_english_male-medium.onnx" | "en_US-norman-medium.onnx";
 }
 
 export async function createWavWithPiper(options: PiperOptions): Promise<void> {
-    const { text, outputFile, noiseW=0.8, noiseScale=0.667, lengthScale=1, model="en_GB-northern_english_male-medium.onnx" } = options;
+    const { text, outputFile, noiseW=0.8, noiseScale=0.667, lengthScale=1, model="en_US-norman-medium.onnx" } = options;
     const modelPath = path.join(MODELS_DIR, model);
 
     // The command pipes the text to the piper executable.

@@ -6,6 +6,7 @@ FROM node:20-slim AS builder
 # Set ARGs for versions to make them easy to update
 ARG PIPER_VERSION=2023.11.14-2
 ARG PIPER_VOICE=en_GB-northern_english_male-medium
+ARG PIPER_VOICE_2=en_US-norman-medium
 
 # --- Stage 1: Compile espeak-ng into a self-contained local directory ---
 WORKDIR /app
@@ -48,6 +49,10 @@ RUN wget "https://github.com/rhasspy/piper/releases/download/${PIPER_VERSION}/pi
 RUN mkdir -p /app/models
 RUN wget "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_GB/northern_english_male/medium/${PIPER_VOICE}.onnx" -O "/app/models/${PIPER_VOICE}.onnx" && \
     wget "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_GB/northern_english_male/medium/${PIPER_VOICE}.onnx.json" -O "/app/models/${PIPER_VOICE}.onnx.json"
+
+RUN wget "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/norman/medium/${PIPER_VOICE_2}.onnx" -O "/app/models/${PIPER_VOICE_2}.onnx" && \
+    wget "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/norman/medium/${PIPER_VOICE_2}.onnx.json" -O "/app/models/${PIPER_VOICE_2}.onnx.json"
+
 
 # --- Stage 3: Build Node.js application ---
 COPY package*.json ./
